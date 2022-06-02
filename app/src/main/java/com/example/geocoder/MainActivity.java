@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -247,15 +248,15 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.d("%%", "response? " + response.toString());
                     //String WR = response.body().toString();
-                    WeatherResult were = response.body();
+                    ArrayList<WeatherResult.Item> were = response.body().getResponse().getBody().getItems().getItem();
 
                     Log.d("body", "body?" + were);
-                    String Category0 = String.valueOf(were.getResponse().getBody().getItems().getItem().get(0).getCategory());
+                    String Category0 = String.valueOf(were.get(0).getCategory());
                     Log.d("%%", "Category0 " + Category0);
                     for (int i = 0; i <= 7; i++) {
-                        String Category = String.valueOf(were.getResponse().getBody().getItems().getItem().get(i).getCategory());
+                        String Category = String.valueOf(were.get(i).getCategory());
                         Log.d("%%", "Category_desc " + Category);
-                        String ObrValue = String.valueOf(were.getResponse().getBody().getItems().getItem().get(i).getObsrValue());
+                        String ObrValue = String.valueOf(were.get(i).getObsrValue());
                         Log.d("%%", "ObrValue_desc " + ObrValue);
 
                         switch (Category) {
